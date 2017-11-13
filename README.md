@@ -5,6 +5,35 @@
          _|
 
 
+NOTE FOR CIRCLE CI SRE USE
+
+Clone this repo from circleci org and then create the `.spf-toolsrc` file
+
+```
+cat > ~/.spf-toolsrc <<EOF
+DOMAIN=spf-orig.circleci.com
+DNS_TIMEOUT=5
+EOF
+```
+
+Check that the SPF source is accurate
+
+```
+dig TXT spf-orig.circleci.com
+```
+
+If it needs changes you will need to get SRE to make them.
+
+Generate the SPF records from the source
+
+```
+./despf.sh spf-orig.circleci.com | ./normalize.sh | ./simplify.sh | ./mkblocks.sh
+```
+
+This will spit out the root SPF TXT record and 5 TXT records to be included - you will need to change `jasan.tk` to `circleci.com`
+
+
+
 # SPF-tools
 
 [![CircleCI badge][circle-img]][circle]
