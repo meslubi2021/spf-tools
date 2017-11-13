@@ -27,10 +27,12 @@ If it needs changes you will need to get SRE to make them.
 Generate the SPF records from the source
 
 ```
-./despf.sh spf-orig.circleci.com | ./normalize.sh | ./simplify.sh | ./mkblocks.sh
+./despf.sh spf-orig.circleci.com | ./normalize.sh | ./simplify.sh | ./mkblocks.sh circleci.com
 ```
 
-This will spit out the root SPF TXT record and 5 TXT records to be included - you will need to change `jasan.tk` to `circleci.com`
+This will spit out the root SPF TXT record and 5 TXT records to be included.
+
+It's important to make the changes starting at `_spf5.circleci.com TXT` and working your way to `_spf1.circleci.com` and then finally `circleci.com TXT` 
 
 
 
